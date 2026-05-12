@@ -1,19 +1,40 @@
-name = "pos-supermarket-api"
-main = "src/index.ts"
-compatibility_date = "2024-01-01"
-
-# Binding D1 Database
-[[d1_databases]]
-binding = "DB"
-database_name = "POS_DB"
-database_id = "cbf2a8f6efb85434d3bd6760d6ea059b"
-
-# Environment variables
-[vars]
-API_VERSION = "1.0"
-
-# Secrets (set via CLI: npx wrangler secret put API_KEY)
-# API_KEY akan digunakan untuk autentikasi request dari frontend
-
-[dev]
-port = 8787
+{
+  "name": "pos-supermarket-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "POS_DB",
+      "database_id": "cbf2a8f6efb85434d3bd6760d6ea059b"
+    }
+  ],
+  
+  "vars": {
+    "API_VERSION": "1.0",
+    "ENVIRONMENT": "production"
+  },
+  
+  "dev": {
+    "port": 8787,
+    "local_protocol": "http"
+  },
+  
+  "build": {
+    "command": "npm run build",
+    "watch_dir": "src"
+  },
+  
+  "triggers": {
+    "crons": []
+  },
+  
+  "routes": [],
+  
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
+}
